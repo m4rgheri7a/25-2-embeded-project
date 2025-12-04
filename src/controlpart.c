@@ -275,20 +275,64 @@ int model(float co2, float humididy, float temperature, float illuminance) {
     (void)illuminance;
     return isHuman;
 }
+// ---------------------------------------------------------------------------- // 
+// 유성
+// ["Temperature", "Humidity", "Light", "CO2"]
+int model(float co2, float humididy, float temperature, float illuminance){
+    float data[4];
 
-int isHumanIn() {
+    // 순서대로 매핑
+    data[0] = temperature;
+    data[1] = humididy;
+    data[2] = illuminance;
+    data[3] = co2;
+
+    // 결정트리 분류 호출
+    int isHuman = classify_human(data);
+
+    return isHuman;
+}
+
+// ["Temperature", "Humidity", "Light", "CO2"]
+int classify_human(float *data) {
+    if (data[2] <= 365.125000) {
+        if (data[2] <= 279.041672) {
+            if (data[2] <= 190.750000) {
+                return 0;
+            } else {
+                return 0;
+            }
+        } else {
+            if (data[0] <= 21.722501) {
+                return 0;
+            } else {
+                return 0;
+            }
+        }
+    } else {
+        if (data[3] <= 486.975006) {
+            return 1;
+        } else {
+            if (data[1] <= 26.893333) {
+                return 1;
+            } else {
+                return 1;
+            }
+        }
+    }
+}
+
+int isHumanIn(){
+    // 모델 분류결과
     // 0 : 사람없음
     // 1 : 사람있음
     float co2 = getCO2();
     float humididy = getHumidity();
     float temperature = getTemperature();
     float illuminance = getIlluminance();
-    int isHuman = model(co2, humididy, temperature, illuminance);
+    int isHumanIn = model(co2, humididy, temperature, illuminance);
 
-    g_IsHuman = isHuman;
-    RESIDE_MODE = isHuman;
-
-    return RESIDE_MODE;
+    return isHumanIn;
 }
 
 // ----------------------------------------------------------------------------
