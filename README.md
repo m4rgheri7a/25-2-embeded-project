@@ -83,8 +83,7 @@ This project implements an intelligent smart home system using **STM32F107** and
 ---
 
 ## 📸 Demo
-*(Insert screenshots or GIFs of the working project here)*
-
+TBD
 ---
 ### 📝 License
 This project was developed for the **Embedded System Design and Experiment** course at **Pusan National University**.
